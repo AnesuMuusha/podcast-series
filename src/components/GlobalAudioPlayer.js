@@ -67,7 +67,7 @@ function GlobalAudioPlayer({ playingEpisode, onPlayPause, onTimeUpdate, onLoaded
   };
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-gray-900 p-4 flex justify-center items-center min-h-[100px]">
+    <div className="fixed bottom-0 left-0 w-full bg-gray-900 p-4 flex justify-center items-center min-h-[50px]">
       {playingEpisode ? (
         <>
           <div className="text-white flex flex-col lg:flex-row w-full justify-center gap-4 lg:gap-10 pr-4 items-center">

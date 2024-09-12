@@ -8,7 +8,7 @@ function FeaturedPodcast({ podcast, genres }) {
   };
 
   return (
-    <div className="relative h-screen-3/4 bg-gray-800">
+    <div className="relative h-screen-3/4 bg-gray-900">
       <Link to={`/podcast/${podcast.id}`}>
         <img
           src={podcast.image}
