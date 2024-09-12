@@ -92,7 +92,7 @@ function PodcastDetails({ onPlayEpisode }) {
     );
   
     if (isFullyListened) {
-      episode.savedPosition = 0; // Start from the beginning
+      episode.savedPosition = 0; 
     } else {
       const savedPosition = localStorage.getItem(`playback-${id}-${seasonIndex}-${episodeIndex}`);
       if (savedPosition) {
@@ -146,34 +146,34 @@ function PodcastDetails({ onPlayEpisode }) {
   }
 
   return (
-    <div className="bg-gradient-to-b from-gray-500 to-gray-900 min-h-screen">
+    <div className="bg-gray-900 min-h-screen">
       <div className="container mx-auto p-4 lg:p-8">
         
         {isLoading ? (
-          <div className="text-orange-400 p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">Loading...</div>
+          <div className="text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">Loading...</div>
         ) : (
           <>
           <NavBar/>
             <div className="flex items-center space-x-4 pt-4">
               <img src={podcast.image} alt={podcast.title} className="w-40 h-1/4 lg:h40 object-cover shadow-lg  rounded" />
               <div>
-                <h1 className="text-2xl lg:text-4xl font-bold text-orange-400">
+                <h1 className="text-2xl lg:text-4xl font-bold text-white">
                   {podcast.title} 
                 </h1>
-                <h1 className="text-xl lg:text-2xl text-orange-400">{podcast.seasons.length} Seasons</h1>
-                <p className="text-orange-300 text-sm mt-2">
+                <h1 className="text-xl lg:text-2xl text-white">{podcast.seasons.length} Seasons</h1>
+                <p className="text-white text-sm mt-2">
                   Last Updated: {podcast.updated ? formatDate(podcast.updated) : 'N/A'}
                 </p>
               </div>
             </div>
-            <h1 className="pt-4 text-xl lg:text-2xl font-bold text-orange-400">About</h1>
+            <h1 className="pt-4 text-xl lg:text-2xl font-bold text-white">About</h1>
             <p className="mt-4 text-white text-sm lg:text-base">
               {isDescriptionExpanded
                 ? podcast.description
                 : truncateDescription(podcast.description, 15)}
               <span
                 onClick={handleToggleDescription}
-                className="text-orange-400 cursor-pointer ml-2"
+                className="text-white cursor-pointer ml-2"
               >
                 {isDescriptionExpanded ? 'Show Less' : 'Show More'}
               </span>
@@ -181,7 +181,7 @@ function PodcastDetails({ onPlayEpisode }) {
             {fullyListenedEpisodes.length > 0 && (
   <button
     onClick={handleResetListenedHistory}
-    className="mt-4 bg-orange-400 text-white p-2 rounded-full"
+    className="mt-4 bg-gray-500 text-white p-2 rounded-full"
   >
     Reset Listened History
   </button>
@@ -190,7 +190,7 @@ function PodcastDetails({ onPlayEpisode }) {
               {podcast.seasons.map((season, seasonIndex) => (
                 <div key={seasonIndex} className="mb-6">
                   <h2
-                    className="text-xl font-semibold cursor-pointer text-orange-400"
+                    className="text-xl font-semibold cursor-pointer text-white"
                     onClick={() => handleToggleSeason(seasonIndex)}
                   >
                     Season {seasonIndex + 1} ({season.episodes.length} Episodes)
@@ -218,13 +218,13 @@ function PodcastDetails({ onPlayEpisode }) {
                                 <div className="flex items-center">
                                   <button
                                     onClick={() => handleToggleFavoriteEpisode(seasonIndex, episodeIndex)}
-                                    className={`min-w-[100px] ml-2 p-2 rounded-full ${isFavorite ? 'bg-yellow-500' : 'bg-orange-400'}`}
+                                    className={`min-w-[100px] text-white ml-2 p-2 rounded-full ${isFavorite ? 'bg-gray-500' : 'bg-gray-400'}`}
                                   >
                                     {isFavorite ? 'Unfavorite' : 'Favorite'}
                                   </button>
                                   <button
                                     onClick={() => handlePlayEpisode(seasonIndex, episodeIndex)}
-                                    className="min-w-[100px] ml-2 p-2 bg-blue-500 text-white rounded-full"
+                                    className="min-w-[100px] ml-2 p-2 bg-gray-500 text-white rounded-full"
                                   >
                                     {isListened ? 'Re-listen' : 'Play'}
                                   </button>

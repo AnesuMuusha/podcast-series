@@ -129,10 +129,10 @@ function Favorite() {
       <div className="container mx-auto">
       <NavBar/>
      <div className='p-4'>
-     <h1 className="text-2xl lg:text-4xl mb-4 bg-gray-600 text-white py-2 px-4 rounded-full">Favorite Episodes</h1>
+     <h1 className="text-2xl lg:text-4xl mb-4 bg-gray-900 text-white py-2 px-4 rounded-full">Favorite Episodes</h1>
        
        {loading ? (
-         <div className="text-orange-400 p-4 text-4xl lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">
+         <div className="text-white p-4 text-4xl lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">
          Loading...
        </div>
 
@@ -142,7 +142,7 @@ function Favorite() {
              <select
                value={sortOption}
                onChange={(e) => setSortOption(e.target.value)}
-               className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500"
+               className="bg-gray-800 text-white py-2 px-4 rounded-full hover:bg-gray-700"
              >
                <option value="title-asc">Sort by Title A-Z</option>
                <option value="title-desc">Sort by Title Z-A</option>
@@ -151,13 +151,13 @@ function Favorite() {
              </select>
            </div>
 
-           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 ">
              {favoriteEpisodes.length > 0 ? (
                favoriteEpisodes.map((favorite, index) => (
-                 <li key={index} className="bg-gray-700 p-4 rounded shadow">
+                 <li key={index} className="bg-gray-800 p-4 rounded shadow">
                    <div className="flex justify-between">
                      <div>
-                       <h3 className="text-lg text-orange-400">{favorite.podcastTitle}</h3>
+                       <h3 className="text-lg text-white">{favorite.podcastTitle}</h3>
                        <p className="text-white">
                          Season {favorite.seasonIndex + 1}, Episode {favorite.episodeIndex + 1}
                        </p>
@@ -171,13 +171,13 @@ function Favorite() {
                      <div className="flex items-center space-x-4">
                        <button
                          onClick={() => handleGoToPodcast(favorite.podcastId)}
-                         className="text-orange-400 hover:underline"
+                         className="text-white hover:text-gray-300"
                        >
                          Go to Podcast
                        </button>
                        <button
                          onClick={() => removeFavorite(favorite.podcastId, favorite.seasonIndex, favorite.episodeIndex)}
-                         className="text-orange-500 hover:text-orange-700"
+                         className="text-white hover:text-gray-300"
                          disabled={removing[`${favorite.podcastId}-${favorite.seasonIndex}-${favorite.episodeIndex}`]}
                        >
                          {removing[`${favorite.podcastId}-${favorite.seasonIndex}-${favorite.episodeIndex}`] ? 'Removing...' : 'Remove'}

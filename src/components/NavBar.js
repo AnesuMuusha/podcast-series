@@ -21,13 +21,13 @@ function NavBar({ onSelectGenre, setSearchQuery }) {
   };
 
   return (
-    <nav className="bg-gray-800 text-white p-4 w-full">
+    <nav className="bg-black text-white p-4 w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
          
           <select
             onChange={handleGenreChange}
-            className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500 sm:w-64"
+            className="bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-800 sm:w-64"
           >
             <option value="">Select Genre</option>
             {genres.map((genre) => (
@@ -57,21 +57,21 @@ function NavBar({ onSelectGenre, setSearchQuery }) {
           </svg>
         </button>
         <div className="hidden sm:flex space-x-4">
-          <Link to="/" className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500">
+          <Link to="/" className="bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-800">
             Home 🏠
           </Link>
 
-          <Link to="/favorite" className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500">
+          <Link to="/favorite" className="bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-800">
             Favorites ⭐
           </Link>
         </div>
       </div>
       {isMenuOpen && (
         <div className="flex flex-col mt-4 sm:hidden">
-          <Link to="/" className="bg-gray-600 text-white mb-2 py-2 px-4 rounded-full hover:bg-gray-500">
+          <Link to="/" className="bg-gray-900 text-white mb-2 py-2 px-4 rounded-full hover:bg-gray-800">
             Home 🏠
           </Link>
-          <Link to="/favorite" className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500">
+          <Link to="/favorite" className="bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-800">
             Favorites ⭐
           </Link>
         </div>

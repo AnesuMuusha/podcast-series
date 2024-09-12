@@ -125,63 +125,69 @@ function Podcasts() {
   }
 
   return (
-    <div className="bg-gray-800 min-h-screen">
+    <div className="bg-black min-h-screen">
       <NavBar onSelectGenre={setSelectedGenre} setSearchQuery={setSearchQuery} />
       {isLoading ? (
-        <div className="text-orange-400 p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-pulse">Loading...</div>
+        <div className="text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-pulse">Loading...</div>
       ) : (
         <>
           <div className="container mx-auto p-4">
             {podcasts.length > 0 && (
               <Slider {...settings}>
+                 
+                 
                 {getRandomPodcasts(podcasts, 6).map((podcast) => (
-                  <div key={podcast.id} className="p-2">
-                    <div className="bg-gray-700 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                 <div className="grid grid-cols-6 gap-4">
+
+                 <div key={podcast.id} className="p-2">
+                    <div className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                       <Link to={`/podcast/${podcast.id}`}>
                         <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
                         <div className="p-4">
-                          <h2 className="text-lg text-orange-400">{podcast.title}</h2>
-                          <h3 className="text-md text-orange-300">
+                          <h2 className="text-lg text-white">{podcast.title}</h2>
+                          <h3 className="text-md text-gray-400">
                             {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
                           </h3>
                         </div>
                       </Link>
                     </div>
-                  </div>
+                  </div></div>
                 ))}
               </Slider>
             )}
 
-            <h1 className="text-2xl font-bold mt-8 mb-4 text-orange-400">Podcasts:</h1>
-            <div className="mb-4 flex flex-col space-y-2">
+<div className="mb-4 flex items-center justify-between flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
+    
+<h1 className="text-2xl font-bold mt-8 mb-4 text-white">Podcasts(ALL):</h1>
   <select
     value={sortOption}
     onChange={(e) => setSortOption(e.target.value)}
-    className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500"
+    className="bg-gray-900 text-white py-2 px-4 rounded-full w-full sm:w-64 hover:bg-gray-800"
   >
     <option value="title-asc">Sort by Title A-Z</option>
     <option value="title-desc">Sort by Title Z-A</option>
     <option value="updated-recent">Sort by Most Recently Updated</option>
     <option value="updated-oldest">Sort by Oldest Updated</option>
   </select>
-  
+
   <input
     type="text"
     value={searchQuery}
     onChange={(e) => setSearchQuery(e.target.value)}
-    className="bg-gray-600 text-white py-2 px-4 rounded-full hover:bg-gray-500"
+    className="bg-gray-900 text-white py-2 px-4 rounded-full w-full sm:w-64 hover:bg-gray-800"
     placeholder="Search for podcasts..."
   />
 </div>
 
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
               {filteredPodcasts.map((podcast) => (
-                <div key={podcast.id} className="bg-gray-700 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div key={podcast.id} className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                   <Link to={`/podcast/${podcast.id}`}>
                     <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
                     <div className="p-4">
-                      <h2 className="text-lg text-orange-400">{podcast.title}</h2>
-                      <h3 className="text-md text-orange-300">
+                      <h2 className="text-lg text-white">{podcast.title}</h2>
+                      <h3 className="text-md text-gray-400">
                         {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
                       </h3>
                     </div>
