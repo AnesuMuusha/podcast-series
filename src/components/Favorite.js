@@ -127,7 +127,9 @@ function Favorite() {
     <div className="bg-gray-900 min-h-screen px-10px">
       
       <div className="container mx-auto">
+      <div className='sticky top-0 z-5'>
       <NavBar/>
+      </div>
      <div className='p-4'>
      <h1 className="text-2xl lg:text-4xl mb-4 bg-gray-900 text-white py-2 px-4 rounded-full">Favorite Episodes</h1>
        
@@ -151,7 +153,7 @@ function Favorite() {
              </select>
            </div>
 
-           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 ">
+           <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-10 ">
              {favoriteEpisodes.length > 0 ? (
                favoriteEpisodes.map((favorite, index) => (
                  <li key={index} className="bg-gray-800 p-4 rounded shadow">
