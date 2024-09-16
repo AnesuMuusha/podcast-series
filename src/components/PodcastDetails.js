@@ -153,7 +153,12 @@ function PodcastDetails({ onPlayEpisode }) {
           <div className="text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">Loading...</div>
         ) : (
           <>
+             <div className='sticky top-0 z-5'>
           <NavBar/>
+          </div>
+          <div>
+            
+          </div>
             <div className="flex items-center space-x-4 pt-4">
               <img src={podcast.image} alt={podcast.title} className="w-40 h-1/4 lg:h40 object-cover shadow-lg  rounded" />
               <div>
