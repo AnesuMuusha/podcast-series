@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function NavBar({ onSelectGenre, setSearchQuery }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [localSearchQuery, setLocalSearchQuery] = useState('');
 
   const genres = [
     { id: 1, name: 'Personal Growth' },
@@ -24,8 +25,8 @@ function NavBar({ onSelectGenre, setSearchQuery }) {
     <nav className="bg-black text-white p-4 w-full">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-         
-          <select
+        
+                    <select
             onChange={handleGenreChange}
             className="bg-gray-900 text-white py-2 px-4 rounded-full hover:bg-gray-800 sm:w-64"
           >
@@ -36,7 +37,7 @@ function NavBar({ onSelectGenre, setSearchQuery }) {
               </option>
             ))}
           </select>
-        </div>
+         </div>
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="sm:hidden focus:outline-none"
