@@ -152,16 +152,16 @@ function PodcastDetails({ onPlayEpisode }) {
         {isLoading ? (
           <div className="text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">Loading...</div>
         ) : (
-          <>
+          <div>
              <div className='sticky top-0 z-5'>
-          <NavBar/>
+          {/* <NavBar/> */}
           </div>
           <div>
             
           </div>
-            <div className="flex items-center space-x-4 pt-4">
-              <img src={podcast.image} alt={podcast.title} className="w-40 h-1/4 lg:h40 object-cover shadow-lg  rounded" />
-              <div>
+            <div className=" mt-5 flex items-center space-x-4 pt-4 bg-gradient-to-b from-sky-500 to-transparent rounded-t ">
+              <img src={podcast.image} alt={podcast.title} className=" mx-5 w-40 h-1/4 lg:h40 object-cover shadow-lg  rounded" />
+              <div className=' mx-5'>
                 <h1 className="text-2xl lg:text-4xl font-bold text-white">
                   {podcast.title} 
                 </h1>
@@ -171,11 +171,12 @@ function PodcastDetails({ onPlayEpisode }) {
                 </p>
               </div>
             </div>
-            <h1 className="pt-4 text-xl lg:text-2xl font-bold text-white">About</h1>
-            <p className="mt-4 text-white text-sm lg:text-base">
+            {/* <div className='bg-gradient-to-b from-sky-500 to-transparent'>
+            <h1 className="pt-4 text-xl lg:text-2xl font-bold text-white  mx-5">About</h1>
+            <p className="mt-4 text-white text-sm lg:text-base  mx-5">
               {isDescriptionExpanded
                 ? podcast.description
-                : truncateDescription(podcast.description, 15)}
+                : truncateDescription(podcast.description, 100)}
               <span
                 onClick={handleToggleDescription}
                 className="text-white cursor-pointer ml-2"
@@ -183,6 +184,7 @@ function PodcastDetails({ onPlayEpisode }) {
                 {isDescriptionExpanded ? 'Show Less' : 'Show More'}
               </span>
             </p>
+            </div> */}
             {fullyListenedEpisodes.length > 0 && (
   <button
     onClick={handleResetListenedHistory}
@@ -192,17 +194,39 @@ function PodcastDetails({ onPlayEpisode }) {
   </button>
 )}
             <div className="mt-8">
+              <div className='grid lg:grid-cols-2 gap-4'>
+              <div className=''>
+            <h1 className="pt-4 text-xl lg:text-2xl font-bold text-white  mx-5">About</h1>
+            <p className="mt-4 text-white text-sm lg:text-base  mx-5">
+              {isDescriptionExpanded
+                ? podcast.description
+                : truncateDescription(podcast.description, 100)}
+              <span
+                onClick={handleToggleDescription}
+                className="text-white cursor-pointer ml-2"
+              >
+                {isDescriptionExpanded ? 'Show Less' : 'Show More'}
+              </span>
+            </p>
+            </div> 
+                <div>
               {podcast.seasons.map((season, seasonIndex) => (
                 <div key={seasonIndex} className="mb-6">
+                  <div className=' flex items-center space-x-4 pt-4 cursor-pointer' onClick={() => handleToggleSeason(seasonIndex)}>
+
+                  <img src={season.image} alt={`Season ${seasonIndex + 1}`} className="w-40 h-1/4 lg:h40 object-cover mt-4 mb-4 shadow-lg rounded" />
+                 <div>
                   <h2
-                    className="text-xl font-semibold cursor-pointer text-white"
-                    onClick={() => handleToggleSeason(seasonIndex)}
+                    className="text-xl font-semibold  text-xl lg:text-2xl text-white"
+                    
                   >
-                    Season {seasonIndex + 1} ({season.episodes.length} Episodes)
+                    Season {seasonIndex + 1} 
                   </h2>
+                  <p className='text-white text-sm mt-2'>{season.episodes.length} Episodes</p>
+                  </div>
+                  </div>
                   {expandedSeason === seasonIndex && (
                     <div>
-                      <img src={season.image} alt={`Season ${seasonIndex + 1}`} className="w-40 h-1/4 lg:h40 object-cover mt-4 mb-4 shadow-lg rounded" />
                       <ul className="mt-4 space-y-4">
                         {season.episodes.map((episode, episodeIndex) => {
                           const isFavorite = favoriteEpisodes.some(
@@ -218,13 +242,13 @@ function PodcastDetails({ onPlayEpisode }) {
                                 <div>
                                   <h3 className="text-lg text-white">
                                     Episode {episodeIndex + 1}: {episode.title}
-                                  </h3>
-              </div>
-                                <div className="flex items-center">
-                                  <button
+                                   </h3>
+                                     </div>
+                                      <div className="flex items-center">
+                                        <button
                                     onClick={() => handleToggleFavoriteEpisode(seasonIndex, episodeIndex)}
                                     className={`min-w-[100px] text-white ml-2 p-2 rounded-full ${isFavorite ? 'bg-gray-500' : 'bg-gray-400'}`}
-                                  >
+                                      >
                                     {isFavorite ? 'Unfavorite' : 'Favorite'}
                                   </button>
                                   <button
@@ -244,7 +268,10 @@ function PodcastDetails({ onPlayEpisode }) {
                 </div>
               ))}
             </div>
-          </>
+             
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </div>
