@@ -12,6 +12,9 @@ function Podcasts() {
   const [sortOption, setSortOption] = useState('title-asc');
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [showMore, setShowMore] = useState({});
+  const [showMoreAll, setShowMoreAll] = useState(false);
+
 
   const genres = [
     { id: 1, name: 'Personal Growth' },
@@ -29,7 +32,13 @@ function Podcasts() {
     const genre = genres.find((genre) => genre.id === id);
     return genre ? genre.name : 'Unknown Genre';
   };
+  const toggleShowMore = (genre) => {
+    setShowMore((prev) => ({ ...prev, [genre]: !prev[genre] }));
+  };
 
+  const MAX_PODCASTS = 6;
+
+  
   // Group podcasts by genre
   const groupPodcastsByGenre = (podcasts) => {
     return podcasts.reduce((acc, podcast) => {
@@ -112,8 +121,8 @@ function Podcasts() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 6,
+    slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
@@ -132,7 +141,7 @@ function Podcasts() {
         },
       },
     ],
-  };
+  };  
 
   // Create grouped podcasts
   const groupedPodcasts = groupPodcastsByGenre(filteredPodcasts);
@@ -142,7 +151,7 @@ function Podcasts() {
   }
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-black min-h-screen container mx-auto p-4 mb-10">
       <div className="sticky top-0 z-50">
         <NavBar onSelectGenre={setSelectedGenre} setSearchQuery={setSearchQuery} />
       </div>
@@ -151,55 +160,66 @@ function Podcasts() {
         <div className="text-white p-4 lg:text-10xl md:text-8xl sm:text-6xl animate-pulse">Loading...</div>
       ) : (
         <>
-          <div className="container mx-auto p-4">
-            <div className="relative z-10">
-                <div className='text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl font-bold bg-gradient-to-b from-green-600 to-green-800 rounded-t-lg'>
-            Podcasts
-            </div>
-<div className=''></div>
-              {podcasts.length > 0 && (
-                <Slider {...settings}>
-                  {getRandomPodcasts(podcasts, 6).map((podcast) => (
-                    <div key={podcast.id} className="p-2 bg-gradient-to-b from-green-900 to-black">
-                       <div className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                           <Link to={`/podcast/${podcast.id}`}>
-                          <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
-                          <div className="p-4">
-                            <h2 className="text-lg text-white">{podcast.title}</h2>
-                            <h3 className="text-md text-gray-400">
-                              {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
-                            </h3>
-                          </div>
-                        </Link>
-                      </div>
+          <div className="">
+          <div className="relative z-10">
+  <div className="text-white p-4 lg:text-10xl md:text-8xl sm:text-6xl font-bold bg-gradient-to-b from-green-600 to-green-800 rounded-t-lg">
+    Podcasts
+  </div>
+  {podcasts.length > 0 && (
+    <Slider {...settings}>
+      {getRandomPodcasts(podcasts, 6).map((podcast) => (
+        <div key={podcast.id} className="p-2 bg-gradient-to-b from-green-900 to-black">
+          <div className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <Link to={`/podcast/${podcast.id}`}>
+              <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
+              <div className="p-4 h-32 flex flex-col justify-between">
+                <h2 className="text-lg text-white truncate">{podcast.title}</h2>
+                <h3 className="text-md text-gray-400 truncate">
+                  {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
+                </h3>
+              </div>
+            </Link>
+          </div>
+        </div>
+      ))}
+    </Slider>
+  )}
+</div>
+
+             <div className="">
+            <h1 className="text-white text-3xl font-bold mb-4">Podcasts by Genre</h1>
+
+            {Object.keys(groupedPodcasts).map((genre) => (
+              <div key={genre} className="mb-8">
+                <h2 className="text-white text-2xl font-semibold mb-4">{genre}</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {(showMore[genre]
+                    ? groupedPodcasts[genre]
+                    : groupedPodcasts[genre].slice(0, MAX_PODCASTS)
+                  ).map((podcast) => (
+                    <div key={podcast.id} className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                      <Link to={`/podcast/${podcast.id}`}>
+                        <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
+                        <div className="p-4">
+                          <h3 className="text-lg text-white">{podcast.title}</h3>
+                        </div>
+                      </Link>
                     </div>
                   ))}
-                </Slider>
-              )}
-            </div>
-
-            <div className="container mx-auto p-4">
-              <h1 className="text-white text-3xl font-bold mb-4">Podcasts by Genre</h1>
-
-              {/* Loop through genres and display podcasts under each */}
-              {Object.keys(groupedPodcasts).map((genre) => (
-                <div key={genre} className="mb-8">
-                  <h2 className="text-white text-2xl font-semibold mb-4">{genre}</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {groupedPodcasts[genre].map((podcast) => (
-                      <div key={podcast.id} className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                        <Link to={`/podcast/${podcast.id}`}>
-                          <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
-                          <div className="p-4">
-                            <h3 className="text-lg text-white">{podcast.title}</h3>
-                          </div>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
                 </div>
-              ))}
-            </div>
+
+                {groupedPodcasts[genre].length > MAX_PODCASTS && (
+                  <button
+                    onClick={() => toggleShowMore(genre)}
+                    className="mt-4 text-white bg-gray-700 px-4 py-2 rounded hover:bg-gray-600"
+                  >
+                    {showMore[genre] ? 'Show Less' : 'Show More'}
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
 
             <div className="mb-4 flex items-center justify-between flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
               <h1 className="text-2xl font-bold mt-8 mb-4 text-white">Podcasts (ALL):</h1>
@@ -213,7 +233,7 @@ function Podcasts() {
                 <option value="updated-recent">Sort by Most Recently Updated</option>
                 <option value="updated-oldest">Sort by Oldest Updated</option>
               </select>
-
+               
               <input
                 type="text"
                 value={searchQuery}
@@ -225,21 +245,30 @@ function Podcasts() {
 
             <div className='text-2xl font-bold mt-8 mb-4 text-white mb-30'>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-20">
-              {filteredPodcasts.map((podcast) => (
-                <div key={podcast.id} className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <Link to={`/podcast/${podcast.id}`}>
-                    <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
-                    <div className="p-4">
-                      <h2 className="text-lg text-white">{podcast.title}</h2>
-                      <h3 className="text-md text-gray-400">
-                        {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
-                      </h3>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 mb-2">
+  {(showMoreAll ? filteredPodcasts : filteredPodcasts.slice(0, MAX_PODCASTS)).map((podcast) => (
+    <div key={podcast.id} className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <Link to={`/podcast/${podcast.id}`}>
+        <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
+        <div className="p-4">
+          <h2 className="text-lg text-white">{podcast.title}</h2>
+          <h3 className="text-md text-gray-400">
+            {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
+          </h3>
+        </div>
+      </Link>
+    </div>
+  ))}
+</div>
+
+{filteredPodcasts.length > MAX_PODCASTS && (
+  <button
+    onClick={() => setShowMoreAll((prev) => !prev)}
+    className=" text-white bg-gray-700 px-4 py-2 rounded hover:bg-gray-600"
+  >
+    {showMoreAll ? 'Show Less' : 'Show More'}
+  </button>
+)}
           </div>
         </>
       )}
