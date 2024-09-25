@@ -39,7 +39,6 @@ function Podcasts() {
   const MAX_PODCASTS = 6;
 
   
-  // Group podcasts by genre
   const groupPodcastsByGenre = (podcasts) => {
     return podcasts.reduce((acc, podcast) => {
       podcast.genres.forEach((genre) => {
@@ -121,27 +120,27 @@ function Podcasts() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 6,
+    slidesToShow: 6, 
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1024, 
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 600, 
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
     ],
-  };  
+  };
 
   // Create grouped podcasts
   const groupedPodcasts = groupPodcastsByGenre(filteredPodcasts);
