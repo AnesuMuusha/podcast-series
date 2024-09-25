@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function NavBar({ onSelectGenre, setSearchQuery }) {
+function NavBar({ onSelectGenre }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [localSearchQuery, setLocalSearchQuery] = useState('');
 
   const genres = [
     { id: 1, name: 'Personal Growth' },
