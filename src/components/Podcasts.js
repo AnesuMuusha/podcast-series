@@ -156,8 +156,9 @@ function Podcasts() {
       </div>
 
       {isLoading ? (
-        <div className="text-white p-4 lg:text-10xl md:text-8xl sm:text-6xl animate-pulse">Loading...</div>
-      ) : (
+       <div className="flex items-center justify-center text-white p-4 lg:text-20xl md:text-8xl sm:text-6xl animate-bounce min-h-screen">
+       Loading...
+     </div>   ) : (
         <>
           <div className="">
           <div className="relative z-10">
@@ -171,7 +172,7 @@ function Podcasts() {
           <div className="bg-gray-900 shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
             <Link to={`/podcast/${podcast.id}`}>
               <img src={podcast.image} alt={podcast.title} className="w-full h-48 object-cover" />
-              <div className="p-4 h-32 flex flex-col justify-between">
+              <div className="p-2 flex flex-col justify-between">
                 <h2 className="text-lg text-white truncate">{podcast.title}</h2>
                 <h3 className="text-md text-gray-400 truncate">
                   {podcast.genres.map((genreId) => getGenreNameById(genreId)).join(', ')}
@@ -186,7 +187,7 @@ function Podcasts() {
 </div>
 
              <div className="">
-            <h1 className="text-white text-3xl font-bold mb-4">Podcasts by Genre</h1>
+            <h1 className="text-white text-3xl font-bold my-4 pt-4">Podcasts by Genre</h1>
 
             {Object.keys(groupedPodcasts).map((genre) => (
               <div key={genre} className="mb-8">
