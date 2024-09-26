@@ -150,7 +150,9 @@ function PodcastDetails({ onPlayEpisode }) {
       <div className="container mx-auto p-4 lg:p-8">
         
         {isLoading ? (
-          <div className="text-white p-4  lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">Loading...</div>
+         <div className="flex items-center justify-center text-white p-4 lg:text-20xl md:text-8xl sm:text-6xl animate-bounce min-h-screen">
+         Loading...
+       </div>
         ) : (
           <div>
              <div className='sticky top-0 z-5'>
