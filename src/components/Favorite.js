@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import NavBar from './NavBar';
+// import NavBar from './NavBar';
 
 function Favorite() {
   const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
@@ -124,20 +124,23 @@ function Favorite() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen px-10px">
+    <div className="bg-gray-900 min-h-screen px-10px sm:text-2xl">
       
       <div className="container mx-auto">
       <div className='sticky top-0 z-5'>
-      <NavBar/>
+      {/* <NavBar/> */}
       </div>
      <div className='p-4'>
-     <h1 className="text-2xl lg:text-4xl mb-4 bg-gray-900 text-white py-2 px-4 rounded-full">Favorite Episodes</h1>
+      <div className='mt-5 flex items-center space-x-4 pt-4 bg-gradient-to-b from-sky-500 to-transparent rounded-t '>
+
+      <h1 className="text-2xl lg:text-4xl mb-4 text-white py-2 px-4 ">Favorite Episodes</h1>
+
+      </div>
        
        {loading ? (
-         <div className="text-white p-4 text-4xl lg:text-10xl md:text-8xl sm:text-6xl animate-bounce">
-         Loading...
-       </div>
-
+        <div className="flex items-center justify-center text-white p-4 lg:text-20xl md:text-8xl sm:text-6xl animate-bounce">
+        Loading...
+      </div>
 ) : (
          <>
            <div className="mb-4 flex space-x-2">
